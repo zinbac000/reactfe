@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import RenderWithMap from "./RenderWithMap/RenderWithMap";
+import BT2ProductList from "./DemoProps/BT2ProductList/BT2ProductList";
+// import DemoProps from "./DemoProps/DemoProps";
+// import EXRenderMap from "./RenderWithMap/EXRenderMap";
+// import RenderWithMap from "./RenderWithMap/RenderWithMap";
 // import BaiTapLayout from "./components/BaiTapLayout/BaiTapLayout";
 // import DataBinding from "./components/DataBinding/DataBinding";
 // import EventBinding from "./EventBinding/EventBinding";
@@ -15,7 +18,10 @@ function App() {
       {/* <EventBinding /> */}
       {/* <StateHandling /> */}
       {/* <BaiTapChonXe /> */}
-      <RenderWithMap />
+      {/* <RenderWithMap /> */}
+      {/* <EXRenderMap /> */}
+      {/* <DemoProps /> */}
+      <BT2ProductList />
     </div>
   );
 }
