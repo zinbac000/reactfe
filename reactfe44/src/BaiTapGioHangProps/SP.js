@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class ProductComponent extends Component {
+export default class SP extends Component {
   render() {
     let { hinhAnh, tenSP, giaBan } = this.props.product;
     return (
@@ -9,8 +9,13 @@ export default class ProductComponent extends Component {
         <div className="card-body">
           <h5 className="card-title">{tenSP}</h5>
           <p className="text-default card-text">{giaBan} VND</p>
-          <button onClick={this.props.clicked} className="btn btn-success">
+        </div>
+        <div className="card-footer">
+          <button onClick={() => this.props.clicked(this.props.product)} className="btn btn-success mr-3">
             Xem chi tiết
+          </button>
+          <button onClick={() => this.props.addToCart(this.props.product.maSP)} className="btn btn-primary">
+            Thêm vào giỏ
           </button>
         </div>
       </div>
