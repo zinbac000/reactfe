@@ -69,11 +69,10 @@ export default class BaiTapGioHangProps extends Component {
     let cartIndex = newCart.findIndex((item) => item.product.maSP === cartProductId);
     if (cartIndex !== -1) {
       newCart.splice(cartIndex, 1);
+      this.setState({
+        cart: newCart
+      });
     }
-
-    this.setState({
-      cart: newCart
-    });
   };
 
   modifyCartQuantity = (productId, increment) => {
@@ -90,7 +89,12 @@ export default class BaiTapGioHangProps extends Component {
   render() {
     return (
       <div className="container mt-5">
-        <button className="btn btn-danger" data-toggle="modal" data-target="#cartModal">
+        <button
+          className="btn btn-danger"
+          data-toggle="modal"
+          data-target="#cartModal"
+          style={{ position: "fixed", top: "50%", left: "-5px", transform: "translateY(-50%)", zIndex: 10 }}
+        >
           Giỏ hàng ({this.state.cart.reduce((total, currentItem) => total + currentItem.quantity, 0)})
         </button>
         <DSSP danhSach={this.products} addToCart={this.addProductToCart} />

@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import BaiTapGioHangProps from "./BaiTapGioHangProps/BaiTapGioHangProps";
+// import BaiTapGioHangProps from "./BaiTapGioHangProps/BaiTapGioHangProps";
+import BaiTapGioHangRedux from "./ReduxDemo/BaiTapGioHangRedux/BaiTapGioHangRedux";
 // import BT2ProductList from "./DemoProps/BT2ProductList/BT2ProductList";
 // import DemoProps from "./DemoProps/DemoProps";
 // import EXRenderMap from "./RenderWithMap/EXRenderMap";
@@ -25,7 +26,8 @@ function App() {
       {/* <DemoProps /> */}
       {/* <BT2ProductList /> */}
       {/* <DemoPropsFunction /> */}
-      <BaiTapGioHangProps />
+      {/* <BaiTapGioHangProps /> */}
+      <BaiTapGioHangRedux />
     </div>
   );
 }

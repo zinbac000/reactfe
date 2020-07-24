@@ -19,7 +19,7 @@ export default class ModalGH extends Component {
             <img width={64} src={item.product.hinhAnh} alt="san pham" />
           </td>
           <td>{item.product.tenSP}</td>
-          <td>{item.product.giaBan}</td>
+          <td>{item.product.giaBan.toLocaleString()}</td>
           <td>
             <button className="btn btn-dark py-0 mr-2" onClick={() => this.props.modifyQuantity(item.product.maSP, -1)}>
               <i className="fa fa-minus" style={{ fontSize: "12px" }}></i>
@@ -29,7 +29,7 @@ export default class ModalGH extends Component {
               <i className="fa fa-plus" style={{ fontSize: "12px" }}></i>
             </button>
           </td>
-          <td>{item.quantity * item.product.giaBan}</td>
+          <td>{(item.quantity * item.product.giaBan).toLocaleString()}</td>
           <td>
             <button className="btn btn-danger" onClick={() => this.props.deleteItem(item.product.maSP)}>
               Xóa
@@ -40,6 +40,7 @@ export default class ModalGH extends Component {
     });
   };
   render() {
+    const totalPrice = this.props.cart.reduce((total, cartItem) => total + cartItem.product.giaBan * cartItem.quantity, 0);
     return (
       <div className="modal fade" id="cartModal">
         <div className="modal-dialog" style={{ maxWidth: "unset", width: "fit-content" }}>
@@ -63,7 +64,15 @@ export default class ModalGH extends Component {
                     <th>Thao tác</th>
                   </tr>
                 </thead>
-                <tbody>{this.renderCartTable()}</tbody>
+                <tbody>
+                  {this.renderCartTable()}
+                  <tr>
+                    <td colSpan={2}>Tổng tiền</td>
+                    <td colSpan={5}>
+                      <strong>{totalPrice.toLocaleString()}</strong>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="modal-footer">
