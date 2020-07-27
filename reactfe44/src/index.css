@@ -4,8 +4,102 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #ffae00;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.card {
+  background: transparent !important;
+  border: none;
+}
+
+.cuocButton {
+  border: none;
+  outline: none;
+
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  font-size: 18px;
+
+  background-color: #028108;
+  color: #ffff00;
+}
+
+@-webkit-keyframes bounce {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+.bounce {
+  -webkit-animation: bounce 0.5s infinite;
+  animation: bounce 0.7s infinite alternate;
+}
+
+.bounceWithFadeIn {
+  -webkit-animation: bounce 0.7s infinite alternate, fadeIn 0.5s 1;
+  animation: bounce 0.7s infinite alternate, fadeIn 0.5s 1;
+}
+
+.shake {
+  -webkit-animation: shake 0.2s linear infinite alternate;
+  animation: shake 0.2s linear infinite alternate;
+}
+
+.fadeIn {
+  -webkit-animation: fadeIn 0.5s 1;
+  animation: fadeIn 0.5s 1;
+}
+
+@keyframes bounce {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes shake {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

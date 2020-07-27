@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // thư viện kết nối giữa react component và redux store
 import { connect } from "react-redux";
 
-import { deleteCartItem } from "../../redux/actions/GioHangActionCreator";
+import { deleteCartItem, modifyQuantity } from "../../redux/actions/GioHangActionCreator";
 
 class GioHangRedux extends Component {
   renderGioHang = () => {
@@ -17,9 +17,13 @@ class GioHangRedux extends Component {
           </td>
           <td>{spGioHang.gia.toLocaleString()}</td>
           <td>
-            <button className="btn btn-dark mr-2">-</button>
+            <button className="btn btn-dark mr-2" onClick={() => this.props.modifyQuantity(spGioHang.maSP, -1)}>
+              -
+            </button>
             {spGioHang.soLuong}
-            <button className="btn btn-dark ml-2">+</button>
+            <button className="btn btn-dark ml-2" onClick={() => this.props.modifyQuantity(spGioHang.maSP, 1)}>
+              +
+            </button>
           </td>
           <td>{(spGioHang.gia * spGioHang.soLuong).toLocaleString()}</td>
           <td>
@@ -48,6 +52,15 @@ class GioHangRedux extends Component {
             </tr>
           </thead>
           <tbody>{this.renderGioHang()}</tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={5}></td>
+              <td>Tổng tiền</td>
+              <td>
+                <strong>{this.props.gioHang.reduce((total, sp) => total + sp.soLuong * sp.gia, 0).toLocaleString()}</strong>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     );
@@ -59,7 +72,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  deleteCartItem
+  deleteCartItem,
+  modifyQuantity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GioHangRedux);

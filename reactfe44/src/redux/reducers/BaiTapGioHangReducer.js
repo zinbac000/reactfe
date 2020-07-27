@@ -22,6 +22,19 @@ const BaiTapGioHangReducer = (state = defaultState, action) => {
       return { gioHang: gioHangCapNhat };
     }
 
+    case "MODIFY_CART_ITEM": {
+      let gioHangCapNhat = [...state.gioHang];
+      let { id, increment } = action.payload;
+      let spGioHang = gioHangCapNhat.find((sp) => sp.maSP === id);
+      if (spGioHang) {
+        if (spGioHang.soLuong > 1 || increment === 1) {
+          spGioHang.soLuong += increment;
+        }
+      }
+
+      return { gioHang: gioHangCapNhat };
+    }
+
     default:
       return { ...state };
   }

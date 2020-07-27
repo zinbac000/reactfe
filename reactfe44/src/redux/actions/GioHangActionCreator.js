@@ -14,3 +14,5 @@ export const addToCart = (sp) => {
 };
 
 export const deleteCartItem = (id) => ({ type: "DELETE_CART_ITEM", payload: { id } });
+
+export const modifyQuantity = (id, increment) => ({ type: "MODIFY_CART_ITEM", payload: { id, increment } });
