@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import BaiTapGameBauCua from "./ReduxDemo/BaiTapGameBauCua/BaiTapGameBauCua";
+import BaiTapTaiXiuRedux from "./ReduxDemo/BaiTapTaiXiuRedux/BaiTapTaiXiuRedux";
+// import BaiTapGameBauCua from "./ReduxDemo/BaiTapGameBauCua/BaiTapGameBauCua";
 // import BaiTapGioHangProps from "./BaiTapGioHangProps/BaiTapGioHangProps";
 // import BaiTapGioHangRedux from "./ReduxDemo/BaiTapGioHangRedux/BaiTapGioHangRedux";
 // import BT2ProductList from "./DemoProps/BT2ProductList/BT2ProductList";
@@ -29,7 +30,8 @@ function App() {
       {/* <DemoPropsFunction /> */}
       {/* <BaiTapGioHangProps /> */}
       {/* <BaiTapGioHangRedux /> */}
-      <BaiTapGameBauCua />
+      {/* <BaiTapGameBauCua /> */}
+      <BaiTapTaiXiuRedux />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-
+import * as actionCreators from "../../redux/actions/BaiTapGioHangAction";
 import "./XucSac.css";
 
 class XucSac extends Component {
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  socXucSac: () => dispatch({ type: "XOC_XUC_SAC" })
+  socXucSac: () => dispatch(actionCreators.xocXucSac())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(XucSac);

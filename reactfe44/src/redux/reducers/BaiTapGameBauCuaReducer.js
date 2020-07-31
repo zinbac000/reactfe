@@ -1,3 +1,5 @@
+import * as actionTypes from "../actions/BaiTapGioHangAction";
+
 const defaultState = {
   danhSachCuoc: [
     { ma: "cua", hinhAnh: "./img/cua.png", diemCuoc: 0 },
@@ -26,26 +28,29 @@ const xucSacDefault = [
 
 const BaiTapGameBauCuaReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "CUOC_DIEM":
-      if (state.diemThuong > 0) {
+    case actionTypes.CUOC_DIEM:
+      if (state.diemThuong > 0 || action.payload.inc === -1) {
         const danhSachCuoc = [...state.danhSachCuoc];
         const quanCoIndex = danhSachCuoc.findIndex((qc) => qc.ma === action.payload.ma);
-        if (quanCoIndex !== -1) {
-          const newQuanCo = {
-            ...danhSachCuoc[quanCoIndex],
-            diemCuoc: danhSachCuoc[quanCoIndex].diemCuoc + 10
-          };
-
-          danhSachCuoc.splice(quanCoIndex, 1, newQuanCo);
-
-          const diemThuong = state.diemThuong - 10;
-
-          return { ...state, danhSachCuoc, diemThuong };
+        if (danhSachCuoc[quanCoIndex].diemCuoc === 0 && action.payload.inc === -1) {
+          return state;
         }
-      }
+        const newQuanCo = {
+          ...danhSachCuoc[quanCoIndex],
+          diemCuoc: danhSachCuoc[quanCoIndex].diemCuoc + 10 * action.payload.inc
+        };
 
-      break;
-    case "XOC_XUC_SAC":
+        danhSachCuoc.splice(quanCoIndex, 1, newQuanCo);
+
+        const diemThuong = state.diemThuong - 10 * action.payload.inc;
+
+        return { ...state, danhSachCuoc, diemThuong };
+      }
+      return state;
+    case actionTypes.XOC_XUC_SAC:
+      if (state.diemThuong === 0 && state.danhSachCuoc.every((quanCuoc) => quanCuoc.diemCuoc === 0)) {
+        return state;
+      }
       // random 3 xuc sac in a bow
       const newXucSacs = [];
       for (let i = 0; i < 3; i++) {
@@ -72,9 +77,8 @@ const BaiTapGameBauCuaReducer = (state = defaultState, action) => {
       }, 0);
       return { ...state, xucSac: newXucSacs, diemThuong: state.diemThuong + diemThuongCongThem, danhSachCuoc: [...defaultState.danhSachCuoc] };
     default:
-      break;
+      return { ...state };
   }
-  return { ...state };
 };
 
 export default BaiTapGameBauCuaReducer;
