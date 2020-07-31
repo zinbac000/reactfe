@@ -6,8 +6,8 @@ import "./XucSac.css";
 
 class XucSac extends Component {
   renderXucSac = () => {
-    return this.props.xucSacs.map((xs) => {
-      return <img key={xs.ma} width={70} className="bounceWithFadeIn" src={xs.hinhAnh} alt="con co" />;
+    return this.props.xucSacs.map((xs, index) => {
+      return <img key={xs.ma + Math.random(100)} width={70} className="bounceWithFadeIn mx-2" src={xs.hinhAnh} alt="con co" />;
     });
   };
 
@@ -15,7 +15,7 @@ class XucSac extends Component {
     return (
       <div className="d-flex flex-column align-items-center">
         <div className="bow d-flex align-items-center justify-content-center flex-wrap">{this.renderXucSac()}</div>
-        <button className="soc shake mt-5">
+        <button className="soc shake mt-5" onClick={() => this.props.socXucSac()}>
           <img width={200} src="./img/soc.png" alt="" />
         </button>
       </div>
@@ -27,4 +27,8 @@ const mapStateToProps = (state) => ({
   xucSacs: state.GameBauCuaReducer.xucSac
 });
 
-export default connect(mapStateToProps)(XucSac);
+const mapDispatchToProps = (dispatch) => ({
+  socXucSac: () => dispatch({ type: "XOC_XUC_SAC" })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(XucSac);
