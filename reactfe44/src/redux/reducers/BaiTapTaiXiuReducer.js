@@ -25,7 +25,7 @@ const BaiTapTaiXiuReducer = (state = defaultState, action) => {
 
       let isWin = true;
 
-      if (xiNgauSet.size > 1) {
+      if (xiNgauSet.size === 1) {
         isWin = isWin && false;
       }
 

@@ -5,7 +5,7 @@ import * as actionCreators from "../../redux/actions/BaiTapTaiXiuAction";
 
 class BanCuoc extends Component {
   renderXiNgau = () => {
-    return this.props.mangXiNgau.map((xingau) => <img key={xingau} width={30} src={`./img/${xingau}.png`} alt="" />);
+    return this.props.mangXiNgau.map((xingau, index) => <img key={index} width={30} src={`./img/${xingau}.png`} alt="" />);
   };
   render() {
     return (
