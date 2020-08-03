@@ -3,8 +3,9 @@ import * as actionTypes from "../actions/BaiTapTaiXiuAction";
 const defaultState = {
   winCount: 0,
   playCount: 0,
-  selected: "",
-  mangXiNgau: [1, 2, 3]
+  selected: "TÀI",
+  mangXiNgau: [1, 2, 3],
+  playing: false
 };
 
 const BaiTapTaiXiuReducer = (state = defaultState, action) => {
@@ -13,14 +14,25 @@ const BaiTapTaiXiuReducer = (state = defaultState, action) => {
       return { ...state, selected: action.luaChon };
     }
     case actionTypes.LAC_XI_NGAU: {
+      return { ...state, playing: true };
+    }
+
+    case actionTypes.RANDOM_XINGAU: {
       const mangXiNgauRandom = [];
+      for (let i = 0; i < state.mangXiNgau.length; i++) {
+        let soNgauNhien = Math.floor(Math.random() * 6) + 1;
+        mangXiNgauRandom.push(soNgauNhien);
+      }
+
+      return { ...state, mangXiNgau: mangXiNgauRandom };
+    }
+
+    case actionTypes.XUAT_KET_QUA: {
       let sum = 0;
       let xiNgauSet = new Set();
       for (let i = 0; i < state.mangXiNgau.length; i++) {
-        let soNgauNhien = Math.floor(Math.random() * 6) + 1;
-        sum += soNgauNhien;
-        xiNgauSet.add(soNgauNhien);
-        mangXiNgauRandom.push(soNgauNhien);
+        sum += state.mangXiNgau[i];
+        xiNgauSet.add(state.mangXiNgau[i]);
       }
 
       let isWin = true;
@@ -37,7 +49,7 @@ const BaiTapTaiXiuReducer = (state = defaultState, action) => {
         isWin = isWin && false;
       }
 
-      return { ...state, mangXiNgau: mangXiNgauRandom, playCount: state.playCount + 1, winCount: isWin ? state.winCount + 1 : state.winCount };
+      return { ...state, playCount: state.playCount + 1, winCount: isWin ? state.winCount + 1 : state.winCount, playing: false };
     }
     default:
       return state;

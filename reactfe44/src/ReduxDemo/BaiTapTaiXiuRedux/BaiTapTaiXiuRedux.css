@@ -28,8 +28,11 @@
   color: #ffffff;
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), inset 0 0 0 8px green, inset 0 0 6px 10px rgba(0, 0, 0, 0.35);
+}
 
-  transition: all 0.3s ease;
+.xiNgau.selected {
+  background-color: #b92121;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35), inset 0 0 0 8px #b92121, inset 0 0 6px 10px rgba(0, 0, 0, 0.35);
 }
 
 .btnPlay {
@@ -54,4 +57,38 @@
 
 .btnPlay:hover {
   background-color: #e0af31;
+}
+
+.btnPlay:disabled {
+  background-color: lightgray;
+
+  cursor: not-allowed;
+}
+
+.animShake {
+  -webkit-animation: shake 0.1s linear infinite alternate;
+  animation: shake 0.1s linear infinite alternate;
+}
+
+.animShake:nth-child(2) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
+@-webkit-keyframes shake {
+  from {
+    transform: translateY(-1px);
+  }
+  to {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: translateY(-30px);
+  }
+  to {
+    transform: translateY(30px);
+  }
 }
