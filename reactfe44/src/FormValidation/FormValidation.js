@@ -1,23 +1,37 @@
 import React, { Component } from "react";
+import TableNguoiDung from "./TableNguoiDung";
 
-export default class FormValidation extends Component {
+import { connect } from "react-redux";
+import * as actions from "../redux/actions/index";
+
+import _ from "lodash";
+
+class FormValidation extends Component {
   state = {
     values: {
-      username: "",
-      password: "",
+      taiKhoan: "",
+      matKhau: "",
       email: "",
-      fullname: "",
-      phone: "",
-      userType: "customer"
+      hoTen: "",
+      soDt: "",
+      maLoaiNguoiDung: "KhachHang"
     },
     errors: {
-      username: "",
-      password: "",
+      taiKhoan: "",
+      matKhau: "",
       email: "",
-      fullname: "",
-      phone: ""
+      hoTen: "",
+      soDt: ""
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!_.isEqual(prevProps.nguoiDungEdit, this.props.nguoiDungEdit)) {
+      this.setState({
+        values: this.props.nguoiDungEdit
+      });
+    }
+  }
 
   handleInputChange = (event) => {
     let { name, value, type } = event.target;
@@ -62,100 +76,118 @@ export default class FormValidation extends Component {
       return;
     }
 
-    console.log(this.state.values);
+    this.props.isEditMode ? this.props.saveUser(this.state.values) : this.props.addUser(this.state.values);
   };
 
   render() {
+    const { taiKhoan, matKhau, hoTen, email, maLoaiNguoiDung, soDt } = this.state.values;
     return (
-      <form style={{ width: "100vw", height: "100vh" }} className="container d-flex justify-content-center align-items-center">
-        <div className="card rounded w-50" style={{ boxShadow: "0 4px 8px rgba(0,0,0,0.2)" }}>
-          <div className="card-header bg-dark text-light text-center">
-            <h3>Form đăng ký</h3>
-          </div>
-          <div className="card-body bg-white">
-            <div className="row">
-              <div className="col-6">
-                <div className="form-group">
-                  <label>Tài khoản</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    placeholder="Tài khoản..."
-                    value={this.state.username}
-                    onChange={this.handleInputChange}
-                  />
-                  <span className="text-danger">{this.state.errors.username}</span>
+      <>
+        <form className="container d-flex justify-content-center pb-5">
+          <div className="card rounded w-50" style={{ boxShadow: "0 4px 8px rgba(0,0,0,0.2)" }}>
+            <div className="card-header bg-dark text-light text-center">
+              <h3>Form đăng ký</h3>
+            </div>
+            <div className="card-body bg-white">
+              <div className="row">
+                <div className="col-6">
+                  <div className="form-group">
+                    <label>Tài khoản</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="taiKhoan"
+                      placeholder="Tài khoản..."
+                      value={taiKhoan}
+                      onChange={this.handleInputChange}
+                      readOnly={this.props.isEditMode}
+                    />
+                    <span className="text-danger">{this.state.errors.taiKhoan}</span>
+                  </div>
+                  <div className="form-group">
+                    <label>Mật khẩu</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="matKhau"
+                      placeholder="Mật khẩu..."
+                      value={matKhau}
+                      onChange={this.handleInputChange}
+                    />
+                    <span className="text-danger">{this.state.errors.matKhau}</span>
+                  </div>
+                  <div className="form-group">
+                    <label>Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      placeholder="Email..."
+                      value={email}
+                      onChange={this.handleInputChange}
+                    />
+                    <span className="text-danger">{this.state.errors.email}</span>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label>Mật khẩu</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    placeholder="Mật khẩu..."
-                    value={this.state.password}
-                    onChange={this.handleInputChange}
-                  />
-                  <span className="text-danger">{this.state.errors.password}</span>
-                </div>
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="Email..."
-                    value={this.state.email}
-                    onChange={this.handleInputChange}
-                  />
-                  <span className="text-danger">{this.state.errors.email}</span>
+                <div className="col-6">
+                  <div className="form-group">
+                    <label>Họ tên</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="hoTen"
+                      placeholder="Họ tên..."
+                      value={hoTen}
+                      onChange={this.handleInputChange}
+                    />
+                    <span className="text-danger">{this.state.errors.hoTen}</span>
+                  </div>
+                  <div className="form-group">
+                    <label>Số điện thoại</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="soDt"
+                      placeholder="Số điện thoại..."
+                      value={soDt}
+                      onChange={this.handleInputChange}
+                    />
+                    <span className="text-danger">{this.state.errors.soDt}</span>
+                  </div>
+                  <div className="form-group">
+                    <label>Loại người dùng</label>
+                    <select name="maLoaiNguoiDung" className="form-control" value={maLoaiNguoiDung} onChange={this.handleInputChange}>
+                      <option value="KhachHang">Khách hàng</option>
+                      <option value="QuanTriVien">Quản trị viên</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-              <div className="col-6">
-                <div className="form-group">
-                  <label>Họ tên</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="fullname"
-                    placeholder="Họ tên..."
-                    value={this.state.fullname}
-                    onChange={this.handleInputChange}
-                  />
-                  <span className="text-danger">{this.state.errors.fullname}</span>
-                </div>
-                <div className="form-group">
-                  <label>Số điện thoại</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="phone"
-                    placeholder="Số điện thoại..."
-                    value={this.state.phone}
-                    onChange={this.handleInputChange}
-                  />
-                  <span className="text-danger">{this.state.errors.phone}</span>
-                </div>
-                <div className="form-group">
-                  <label>Loại người dùng</label>
-                  <select name="userType" className="form-control" value={this.state.userType} onChange={this.handleInputChange}>
-                    <option value="customer">Khách hàng</option>
-                    <option value="administrator">Quản trị viên</option>
-                  </select>
+              <div className="row">
+                <div className="text-left col-12">
+                  <button style={{ backgroundColor: "#562c91" }} className="btn btn-success" onClick={this.handleSubmit}>
+                    {this.props.isEditMode ? "Cập nhật" : "Đăng ký"}
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="text-left col-12">
-                <button style={{ backgroundColor: "#1e0e69" }} className="btn btn-success" onClick={this.handleSubmit}>
-                  Đăng ký
-                </button>
-              </div>
-            </div>
           </div>
-        </div>
-      </form>
+        </form>
+        <TableNguoiDung />
+      </>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  nguoiDungEdit: state.BaiTapQuanLyNguoiDungReducer.nguoiDungEdit,
+  isEditMode: state.BaiTapQuanLyNguoiDungReducer.isEditMode
+});
+
+const mapDispatchToProps = {
+  addUser: actions.addUser,
+  saveUser: actions.saveUser,
+  editUser: actions.editUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormValidation);

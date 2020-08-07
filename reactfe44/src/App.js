@@ -18,7 +18,7 @@ import FormValidation from "./FormValidation/FormValidation";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App py-5">
       {/* <BaiTapLayout /> */}
       {/* <DataBinding /> */}
       {/* <EventBinding /> */}
