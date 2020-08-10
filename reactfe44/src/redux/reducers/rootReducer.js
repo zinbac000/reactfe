@@ -4,10 +4,12 @@ import { combineReducers } from "redux";
 //import BaiTapGameBauCuaReducer from "./BaiTapGameBauCuaReducer";
 import BaiTapTaiXiuReducer from "./BaiTapTaiXiuReducer";
 import BaiTapQuanLyNguoiDungReducer from "./BaiTapQuanLyNguoiReducer";
+import QuanLyPhimReducer from "./QuanLyPhimReducer";
 
 // nơi quản lý state của toàn ứng dụng
 export default combineReducers({
   //nơi khai báo các reducer theo từng feature
   TaiXiuReducer: BaiTapTaiXiuReducer,
-  BaiTapQuanLyNguoiDungReducer
+  BaiTapQuanLyNguoiDungReducer,
+  QuanLyPhimReducer
 });

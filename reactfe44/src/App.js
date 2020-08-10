@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import FormValidation from "./FormValidation/FormValidation";
+import AjaxAPI from "./AjaxAPI/AjaxAPI";
+// import FormValidation from "./FormValidation/FormValidation";
 // import BaiTapTaiXiuRedux from "./ReduxDemo/BaiTapTaiXiuRedux/BaiTapTaiXiuRedux";
 // import BaiTapGameBauCua from "./ReduxDemo/BaiTapGameBauCua/BaiTapGameBauCua";
 // import BaiTapGioHangProps from "./BaiTapGioHangProps/BaiTapGioHangProps";
@@ -33,7 +34,8 @@ function App() {
       {/* <BaiTapGioHangRedux /> */}
       {/* <BaiTapGameBauCua /> */}
       {/* <BaiTapTaiXiuRedux /> */}
-      <FormValidation />
+      {/* <FormValidation /> */}
+      <AjaxAPI />
     </div>
   );
 }
